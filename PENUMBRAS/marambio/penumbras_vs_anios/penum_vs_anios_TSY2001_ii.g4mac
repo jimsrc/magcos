@@ -1,0 +1,113 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+#
+#For the visualisation use a smaller maximum step length
+#
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 900. Re
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#
+#################################################################################
+#IGRF, SIN IMF
+#The field is computed on the 1st Jan 1998 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 1991 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+/MAGCOS/BFIELD/SetDst 0 nT
+#################################################################################
+# Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MARAMBIO (64º14'S 56º38'W; Rc=xxGV)
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km -64.23 303.37 degree
+#
+##################################################################################
+##################################################################################
+#RIGIDITIES
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 2.70 -0.01 99
+##################################################################################
+#
+# DIRECC ASINTOTICA VERTICAL
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1991 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_91.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1992 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_92.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1993 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_93.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1994 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_94.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1995 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_95.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1996 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_96.out
+##################################################################################
+##################################################################################
+# PENUMBRA
+/MAGCOS/BFIELD/SetStartDate 1997 1 1 0 0 0
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_TSY2001_97.out
+##################################################################################
+##################################################################################
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+#/vis/scene/create
+#/vis/open VRML2FILE
+#/MAGCOS/DRAW/Show
+#/MAGCOS/DRAW/Reset
+
+

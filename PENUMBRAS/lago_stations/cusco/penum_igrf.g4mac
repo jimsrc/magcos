@@ -1,0 +1,72 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 900. Re
+
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#################################################################################
+#IGRF + IMF
+#
+/MAGCOS/BFIELD/SetStartDate 2010 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+#/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+#################################################################################
+# Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MARAMBIO (64º14'S 56º38'W; Rc=xxGV)
+#OBSERVING POSITION: TUCUMAN 26.81S, 65.21W; Rc=xxGV
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km -13.52 288.04 degree
+#
+##################################################################################
+##################################################################################
+#RIGIDITIES
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 14.0 -0.01 499
+##################################################################################
+#
+# DIRECC ASINTOTICA VERTICAL
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+##################################################################################
+# PENUMBRA
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections penum_igrf.out
+##################################################################################
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+#/vis/scene/create
+#/vis/open VRML2FILE
+#/MAGCOS/DRAW/Show
+#/MAGCOS/DRAW/Reset
+
+
