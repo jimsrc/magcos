@@ -1,0 +1,143 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+
+#
+#Integration parameter
+#
+
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+
+#
+#
+#DIPOLO DES_CENTRADO, SIN IMF
+#The field is computed on the 12th december 1989 at 10 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 1989 1 1 10 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel DIPOLE
+/MAGCOS/BFIELD/SetShiftedGeodipoleFromIGRF
+#/MAGCOS/BFIELD/SetExternalFieldModel NOFIELD
+
+#Definition of particle type
+#
+/gps/particle proton
+
+
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35. 290. degree
+#
+##################################################################################
+#diferentes direcciones -> RigidityVsDirection.out
+#
+/MAGCOS/SCENARIO/RCutoffVsDirection GEOID 90 -30 3 0 45 8 RigidityVsDirection.out
+##################################################################################
+
+
+
+
+
+#
+#Definition of the diffrent rigiditise of particle
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 100. -10.0 9
+
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35. 290. degree
+########################################################################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 90. 270. degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections rojo.out
+
+########################################################################################################################################
+#
+#AHORA OTRAS DIRECC ASINTOTICAS:
+#
+/MAGCOS/SOURCE/SetDirection GEOID 90. 180. degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#VERDE
+/MAGCOS/DRAW/SetColour 0 1 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections verde.out
+
+########################################################################################################################################
+#
+#AHORA OTRAS DIRECC ASINTOTICAS:
+#
+/MAGCOS/SOURCE/SetDirection GEOID 90. 90 degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#BLANCO
+/MAGCOS/DRAW/SetColour 1 1 1
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections blanco.out
+
+########################################################################################################################################
+
+
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+/vis/scene/create
+/vis/open VRML2FILE
+/MAGCOS/DRAW/Show
+/MAGCOS/DRAW/Reset
+#/vis/viewer/flush
+
+
+

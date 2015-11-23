@@ -1,0 +1,61 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 0
+
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+
+#
+#Integration parameter
+#
+
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#################################################################################
+#IGRF, SIN IMF
+#The field is computed on the 1st January 2011 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 2011 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+/MAGCOS/BFIELD/SetDst -200 nT
+
+#################################################################################
+# Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+# OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35. 290. degree
+#
+##################################################################################
+#
+# DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+##################################################################################
+#diferentes horas -> FILE.out
+#
+/MAGCOS/SCENARIO/RCutoffVsTime 0 0.3 80 hour RigVsTime_Dst=-200_RES.out
+##################################################################################
+########################################################################################################################################
+

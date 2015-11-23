@@ -1,0 +1,10 @@
+set grid
+set xlabel "Hora Local (Malargüe)"
+set ylabel "Rc [GV]"
+pl [0:24] [] './RigVsTime_Dst=0_RES_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=0nT"
+repl './dst-30_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=-30nT"
+repl 'dst-100_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=-100nT"
+repl 'dst-200_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=-200nT"
+repl 'dst-300_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=-300nT"
+repl 'dst-600_local' u 1:2 ev 3 with linespoints pt 7 ti ""
+repl 'dst-600_local' u 1:2 ev 3 with linespoints pt 7 ti "Dst=-600nT"

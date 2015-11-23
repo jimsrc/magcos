@@ -1,0 +1,131 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+
+#
+#Integration parameter
+#
+
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetBSMaxStep 1. re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+
+#
+#
+#DIPOLO DES_CENTRADO, SIN IMF
+#The field is computed on the 12th december 1989 at 10 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 1989 1 1 10 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel DIPOLE
+/MAGCOS/BFIELD/SetShiftedGeodipoleFromIGRF
+#/MAGCOS/BFIELD/SetExternalFieldModel NOFIELD
+
+#Definition of particle type
+#
+/gps/particle proton
+
+#
+#Definition of the diffrent rigiditise of particle
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 601. -1.0 1
+
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  0. 0. degree
+########################################################################################################################################
+#OBSERVING POSITION AND INCIDENT DIRECTION
+/MAGCOS/SOURCE/SetDirection GEOID 45. 0. degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections LAT_0_DIP_G4.out
+
+########################################################################################################################################
+#OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  0. 30. degree
+#
+#AHORA OTRAS DIRECC ASINTOTICAS:
+#
+/MAGCOS/SOURCE/SetDirection GEOID 45. 180. degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#VERDE
+/MAGCOS/DRAW/SetColour 0 1 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections LAT_1_DIP_G4.out
+
+########################################################################################################################################
+#OBSERVING POSITION: MALARGUE
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  30. 0. degree
+#
+#AHORA OTRAS DIRECC ASINTOTICAS:
+#
+/MAGCOS/SOURCE/SetDirection GEOID 45. 90. degree
+
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#AZUL
+/MAGCOS/DRAW/SetColour 0 0 1
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections LAT_2_DIP_G4.out
+
+########################################################################################################################################
+
+
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+/vis/scene/create
+/vis/open VRML2FILE
+/MAGCOS/DRAW/Show
+/MAGCOS/DRAW/Reset
+#/vis/viewer/flush
+
+
+
