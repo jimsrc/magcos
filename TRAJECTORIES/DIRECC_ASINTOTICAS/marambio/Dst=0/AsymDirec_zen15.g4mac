@@ -1,0 +1,216 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+##################################################################################
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#
+##################################################################################
+#IGRF, CON IMF
+#The field is computed on the 1st Jan 2010 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 2010 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+##################################################################################
+#Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MARAMBIO (64º14' South, 56º38' West; Rc=0.33GV)
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  -64.23 303.37 degree
+##################################################################################
+#
+# Definition of the diffrent rigiditise of particle
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 10. -0.3 33
+##################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN00_AZIM00.out
+##################################################################################
+#**********************************************************************************
+# AHORA ZENITH = 15º
+#**********************************************************************************
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 0. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM00.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 45. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM45.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 90. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM90.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 135. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM135.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 180. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM180.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 225. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM225.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 270. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM270.out
+###################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 15. 315. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections AsymDirec_ZEN15_AZIM315.out
+###################################################################################
+
+

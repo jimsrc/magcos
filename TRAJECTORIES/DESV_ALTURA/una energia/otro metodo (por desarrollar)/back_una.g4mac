@@ -1,0 +1,137 @@
+# - FALTA DEFINIR LA DIRECC ASINTOTICA (ZENITH Y AZIMUTH) :
+#	- HAY Q  HALLARLAS A PARTIR DE LAS "LAT Y LONG ASINTOTICAS" :
+#		- PARA LA AZIMUTH : HAY Q TRANSFORMAR DEFINIENDO LA DIRECCION (RESPECTO DEL NORTE GEOGRAF.) CON QUE 
+#		  EL PLANO (DEFINIDO POR EL CENTRO DE LA TIERRA, MALARGUE Y LA ULTIMA POSICION DE LA PARTICULA), CORTA 
+#		  AL PLANO DE MALARGUE (DEFINIDO POR LA NORMAL A LA SUPERFICIE).
+#		- PARA EL ZENITH : HAY Q DEFINIR LOS VECTORES (AMBOS CON ORIGEN EN EL CENTRO DE LA TIERRA) Q APUNTAN 
+#		  A: MALARGUE Y A LA ULTIMA POSIC. DE LA PARTICULA
+
+
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+##################################################################################
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#
+##################################################################################
+#IGRF, CON IMF
+#The field is computed on the 1st Jan 2010 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 2010 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+##################################################################################
+# Definition of particle type => INTEGRO PARA ATRAS (ANTI-PROTON)
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE (35.3 South, 69.3 West; Rc=9.5GV)
+#
+#/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35.3 290.7 degree
+/MAGCOS/SOURCE/SetPositionVector GEO -2.21511506 3.39636854 -0.36704686 Re
+##################################################################################
+###################################################################################
+# DIRECC ASINTOTICA = DIRECCION OPUESTA (RESPECTO DE LA DIRECCION TEMPORAL POSITIVA) 
+# DEL ELEMENTRO DE TRAYECTORIA, AL FINAL DE SU TRAYECTORIA
+#
+/MAGCOS/SOURCE/SetDirection GEO -6.86579366 115.77724169 degree
+##################################################################################
+#
+# RIGIDECES DE LA PARTICULA: 1 SOLA ENERGIA.
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 1. -.5 1
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections reverse_p.out
+##################################################################################
+##################################################################################
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+/vis/scene/create
+/vis/open VRML2FILE
+/MAGCOS/DRAW/Show
+/MAGCOS/DRAW/Reset
+#/vis/viewer/flush
+
+
+#####################################################################################################################################
+
+
+
+
+##################################################################################
+# Definition of particle type => INTEGRO PARA ATRAS (ANTI-PROTON)
+#
+/gps/particle anti_proton
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE (35.3 South, 69.3 West; Rc=9.5GV)
+#
+#/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35.3 290.7 degree
+/MAGCOS/SOURCE/SetPositionVector GEO -2.21511506 3.39636854 -0.36704686 Re
+##################################################################################
+###################################################################################
+# DIRECC ASINTOTICA = DIRECCION OPUESTA (RESPECTO DE LA DIRECCION TEMPORAL POSITIVA) 
+# DEL ELEMENTRO DE TRAYECTORIA, AL FINAL DE SU TRAYECTORIA
+#
+/MAGCOS/SOURCE/SetDirection GEO -6.86579366 115.77724169 degree
+##################################################################################
+#
+# RIGIDECES DE LA PARTICULA: 1 SOLA ENERGIA.
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 1. -.5 1
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 0 1 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections reverse_tray_antip.out
+##################################################################################
+##################################################################################
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+/vis/scene/create
+/vis/open VRML2FILE
+/MAGCOS/DRAW/Show
+/MAGCOS/DRAW/Reset
+#/vis/viewer/flush

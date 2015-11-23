@@ -1,0 +1,78 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100. Re
+##################################################################################
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#
+##################################################################################
+#IGRF, CON IMF
+#The field is computed on the 1st Jan 2010 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 2010 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+/MAGCOS/BFIELD/SetDst -100 nT
+##################################################################################
+#Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MARAMBIO (64º14' South, 56º38' West; Rc=2.22GV)
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km -64.23 303.37 degree
+##################################################################################
+#
+#Definition of the diffrent rigiditise of particle
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 100. -0.3 333
+##################################################################################
+###################################################################################
+#
+#DIRECC ASINTOTICA
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections 100nT.out
+##################################################################################
+
+
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+#/vis/scene/create
+#/vis/open VRML2FILE
+#/MAGCOS/DRAW/Show
+#/MAGCOS/DRAW/Reset
+

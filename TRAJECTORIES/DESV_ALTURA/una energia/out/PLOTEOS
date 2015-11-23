@@ -1,0 +1,6 @@
+ALTURA VS DESVIACION:
+pl './DireccAsint_vs_PosicAsint' u 2:1:(sqrt($3*$3+$4*$4+$5*$5)) lt pal
+spl './DireccAsint_vs_PosicAsint' u 2:1:(sqrt($3*$3+$4*$4+$5*$5)) lt pal
+
+TRAYECTORIA:
+spl './DireccAsint_vs_PosicAsint' u 3:4:5

@@ -1,0 +1,215 @@
+################################################################
+#MAGNETOCOSMICS Macro file for computing asymptotic directions #
+#and cutoff rigidities for  a given observing  position and    #
+#direction of incidence                                        #
+################################################################
+#
+#for visualisation used /tracking/storeTrajectory 1 
+#
+#
+/tracking/storeTrajectory 0
+/tracking/verbose 0
+/run/verbose 1
+#
+#For the visualisation use a smaller maximum step length
+#
+
+/MAGCOS/USERLIMIT/SetMaxStepLength .1 Re
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 0.7 Re
+##################################################################################
+#
+#Integration parameter
+#
+/MAGCOS/INTEGRATION/SetPrecision 1e-6 
+/MAGCOS/INTEGRATION/SetG4MaxStep 1e-1 re
+/MAGCOS/INTEGRATION/SetDeltaIntersection 1e-2 re
+#
+##################################################################################
+#IGRF, CON IMF
+#The field is computed on the 1st Jan 2010 at 00 hour 
+#
+/MAGCOS/BFIELD/SetStartDate 2010 1 1 0 0 0
+/MAGCOS/BFIELD/SetGeomagneticFieldModel IGRF
+/MAGCOS/BFIELD/SetExternalFieldModel TSY2001
+##################################################################################
+#Definition of particle type
+#
+/gps/particle proton
+##################################################################################
+#
+#OBSERVING POSITION: MALARGUE (35.3 South, 69.3 West; Rc=9.5GV)
+#
+/MAGCOS/SOURCE/SetPosition GEOID 20. km  -35.3 290.7 degree
+##################################################################################
+#
+# RIGIDECES DE LA PARTICULA: 1 SOLA ENERGIA.
+#
+/MAGCOS/RIGIDITYVECTOR/Reset
+/MAGCOS/RIGIDITYVECTOR/AddValues 10. -5 1
+##################################################################################
+###################################################################################
+#
+# DIRECC ASINTOTICA : VERTICAL.
+#
+/MAGCOS/SOURCE/SetDirection GEOID 0. 0. degree
+##################################################################################
+/tracking/storeTrajectory 1
+/MAGCOS/DRAW/DrawTrajectory true
+/MAGCOS/DRAW/DrawPoints false
+#ROJO
+/MAGCOS/DRAW/SetColour 1 0 0
+/MAGCOS/DRAW/SetCoordinateSystem GEO
+#
+#Recompute with G4 algorithm
+#
+/MAGCOS/INTEGRATION/SelectG4IntegrationMethod
+#
+##################################################################################
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 0.7 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=0.7Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 0.8 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=0.8Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 0.9 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=0.9Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 1.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=1.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.1 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.1Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.2 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.2Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.3 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.3Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.4 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.4Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.5 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.5Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.6 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.6Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.7 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.7Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.8 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.8Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 2.9 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=2.9Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.1 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.1Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.2 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.2Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.3 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.3Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.4 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.4Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.5 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.5Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.6 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.6Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 3.7 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=3.7Re.out
+##################################################################################
+#
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 4.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=4.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 4.3 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=4.3Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 4.6 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=4.6Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 4.9 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=4.9Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 5.2 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=5.2Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 5.5 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=5.5Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 5.8 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=5.8Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 6.1 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=6.1Re.out
+##################################################################################
+#
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 7.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=7.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 7.5 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=7.5Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 8.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=8.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 8.5 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=8.5Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 9.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=9.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 10.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=10.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 11.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=11.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 12.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=12.0Re.out
+##################################################################################
+#
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 20.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=20.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 30.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=30.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 40.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=40.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 50.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=50.0Re.out
+##################################################################################
+#
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 90.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=90.0Re.out
+##################################################################################
+/MAGCOS/USERLIMIT/SetMaxTrajectoryLength 100.0 Re
+/MAGCOS/SCENARIO/ComputeAsymptoticDirections long_trayec=100.0Re.out
+##################################################################################
+#
+#For visualisatiom of the trajectories uncomment and modify the following lines
+#
+/vis/scene/create
+/vis/open VRML2FILE
+/MAGCOS/DRAW/Show
+/MAGCOS/DRAW/Reset
+#/vis/viewer/flush

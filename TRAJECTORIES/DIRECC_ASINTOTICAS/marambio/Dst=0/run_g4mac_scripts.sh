@@ -1,0 +1,9 @@
+##
+#
+STATIC_MAGNETOCOSMICS AsympDirec_zen0_Dst000.g4mac
+STATIC_MAGNETOCOSMICS AsympDirec_zen0_Dst100.g4mac
+STATIC_MAGNETOCOSMICS AsympDirec_zen0_Dst200.g4mac
+STATIC_MAGNETOCOSMICS AsympDirec_zen0_Dst300.g4mac
+STATIC_MAGNETOCOSMICS AsympDirec_zen0_Dst400.g4mac
+#
+##

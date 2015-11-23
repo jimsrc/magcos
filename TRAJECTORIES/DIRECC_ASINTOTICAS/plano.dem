@@ -1,0 +1,17 @@
+set title "Gnuplot Correspondences"
+unset key
+unset border
+unset yzeroaxis
+unset xtics
+unset ytics
+#
+# plot world map and correspondent locations as a +
+plot 'world.dat' with lines lt 3 
+repl './AsymDirec_ZEN15_.dat' u 4:3 with linespoints pt 7 lt rgb "red"
+set title ""
+set key on
+set border
+set yzeroaxis
+set xtics
+set ytics
+reset
